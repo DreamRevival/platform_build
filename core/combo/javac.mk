@@ -12,7 +12,7 @@ ifeq ($(HOST_OS), windows)
     COMMON_JAVAC := development/host/windows/prebuilt/javawrap.exe -J-Xmx256m \
         -target 1.5 -Xmaxerrs 9999999
 else
-    COMMON_JAVAC := javac -J-Xmx512M -target 1.5 -Xmaxerrs 9999999
+    COMMON_JAVAC := javac -J-Xmx512M -source 1.5 -target 1.5 -Xmaxerrs 9999999
 endif
 
 # Eclipse.
@@ -25,7 +25,7 @@ endif
 # OpenJDK.
 ifeq ($(CUSTOM_JAVA_COMPILER), openjdk)
     # We set the VM options (like -Xmx) in the javac script.
-    COMMON_JAVAC := prebuilt/common/openjdk/bin/javac -target 1.5 \
+    COMMON_JAVAC := prebuilt/common/openjdk/bin/javac -source 1.5 -target 1.5 \
         -Xmaxerrs 9999999
     $(info CUSTOM_JAVA_COMPILER=openjdk)
 endif
