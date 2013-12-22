@@ -89,10 +89,13 @@ else
   PACKAGES := $(PACKAGES) $(LOCAL_MODULE)
 endif
 
-ifneq ($(prebuilt_module_is_a_library),)
-  ifneq ($(LOCAL_IS_HOST_MODULE),)
-	$(transform-host-ranlib-copy-hack)
-  else
-	$(transform-ranlib-copy-hack)
+# Run OS X ranlib transform if needed.
+ifeq ($(HOST_RUN_RANLIB_AFTER_COPYING),true)
+  ifneq ($(prebuilt_module_is_a_library),)
+    ifneq ($(LOCAL_IS_HOST_MODULE),)
+	  $(transform-host-ranlib-copy-hack)
+    else
+	  $(transform-ranlib-copy-hack)
+    endif
   endif
 endif
